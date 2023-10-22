@@ -1,2 +1,3 @@
-# testing-system
-The testing system that supports questions with a fuzzy logic
+# Система тестирования с поддержкой нечеткой логики
+
+Тестовая система, поддерживающая вопросы с нечеткой логикой.
