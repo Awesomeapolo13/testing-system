@@ -1,14 +1,14 @@
 FROM php:8.2.0-fpm-alpine
 
-RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
+RUN apk add --no-cache --update curl git build-base zlib-dev oniguruma-dev autoconf linux-headers bash
 
 # Если аргумент INSTALL_XDEBUG будет равен true, то устанавливаем xdebug (теперь можно исп. этот файл и для прод. деплоя)
 ARG INSTALL_XDEBUG=false
 # Подтягиваем зависимости для xdebug и включаем расширение xdebug в php.ini
-#RUN if [ ${INSTALL_XDEBUG} = true ];  \
-#    then \
-#      pecl install xdebug && docker-php-ext-enable xdebug; \
-#    fi; \
+RUN if [ ${INSTALL_XDEBUG} = true ];  \
+    then \
+      pecl install xdebug && docker-php-ext-enable xdebug; \
+    fi;
 
 # Пробрасываем xdebug.ini в контейнер php
 COPY ./.deployment/docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
