@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="POST" action="/test/result">
+        {% for question in test %}
+            <div>
+                <label for="answer">{{ question.label }}</label>
+                {% for {answer, checked} in question.answers %}
+                    <input id="answer" name="{{ answer }}" type="checkbox" {% if checked %}checked{% endif %}>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}
