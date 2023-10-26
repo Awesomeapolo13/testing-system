@@ -13,6 +13,8 @@ class TestController extends AbstractController
     #[Route(path: '/', methods: 'GET', name: 'app_testing_start_page')]
     public function getStartPageAction(): Response
     {
-        return new Response();
+        return $this->render(
+            'testing_sys/main.html.twig',
+        );
     }
 }
