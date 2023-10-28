@@ -26,78 +26,71 @@ class TestController extends AbstractController
             [
                 'test' => [
                     [
-                        'label' => '1 + 1 = ',
+                        'id' => 1,
+                        'title' => '1 + 1 = ',
                         'answers' => [
                             [
-                                '3' => false,
+                                'title' => '3',
                             ],
                             [
-                                '2' => false,
+                                'title' => '2',
                             ],
                             [
-                                '0' => false,
+                                'title' => '0',
                             ],
                         ],
                         'correct' => null,
                     ],
                     [
-                        'label' => '2 + 2 = ',
+                        'id' => 2,
+                        'title' => '2 + 2 = ',
                         'answers' => [
                             [
-                                'name' => '4',
-                                'selected' => false,
+                                'title' => '4',
                             ],
                             [
-                                'name' => '3 + 1',
-                                'selected' => false,
+                                'title' => '3 + 1',
                             ],
                             [
-                                'name' => '10',
-                                'selected' => false,
+                                'title' => '10',
                             ],
                         ],
                         'correct' => null,
                     ],
                     [
-                        'label' => '3 + 3 = ',
+                        'id' => 3,
+                        'title' => '3 + 3 = ',
                         'answers' => [
                             [
-                                'name' => '1 + 5',
-                                'selected' => false,
+                                'title' => '1 + 5',
                             ],
                             [
-                                'name' => '1',
-                                'selected' => false,
+                                'title' => '1',
                             ],
                             [
-                                'name' => '6',
-                                'selected' => false,
+                                'title' => '6',
                             ],
                             [
-                                'name' => '2 + 4',
-                                'selected' => false,
+                                'title' => '2 + 4',
                             ],
                         ],
                         'correct' => null,
                     ],
                     [
-                        'label' => '4 + 4 = ',
+                        'id' => 1,
+                        'title' => '4 + 4 = ',
                         'answers' => [
                             [
-                                'name' => '8',
-                                'selected' => false,
+                                'title' => '8',
                             ],
                             [
-                                'name' => '4',
-                                'selected' => false,
+                                'title' => '4',
                             ],
                             [
-                                'name' => '0',
-                                'selected' => false,
+                                'title' => '0',
                             ],
                             [
-                                'name' => '0 + 8',
-                                'selected' => false,
+                                'title' => '0 + 8',
                             ],
                         ],
                         'correct' => null,

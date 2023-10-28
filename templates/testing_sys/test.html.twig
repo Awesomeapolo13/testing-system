@@ -2,13 +2,19 @@
 
 {% block body %}
     <form method="POST" action="/test/result">
-        {% for question in test %}
+        {% for key, question in test %}
             <div>
-                <label for="answer">{{ question.label }}</label>
-                {% for {answer, checked} in question.answers %}
-                    <input id="answer" name="{{ answer }}" type="checkbox" {% if checked %}checked{% endif %}>
+                {{ key + 1 }}) <label for="answer">{{ question.title }}</label>
+                {% for answer in question.answers %}
+                    <div>
+                        <input id="answer" name="{{ answer.title }}" type="checkbox"> {{ answer.title }}
+                    </div>
                 {% endfor %}
             </div>
+        {% else %}
+        <div>
+            Не обнаружено вопросов.
+        </div>
         {% endfor %}
 
         <button type="submit">Отправить</button>
