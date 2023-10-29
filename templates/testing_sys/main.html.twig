@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <form action="/test">
-        <button type="submit">Начать</button>
-    </form>
+    {% for test in testList %}
+        <div>
+            <div>{{ test.title }}</div>
+            <div>
+                {{ test.description }}
+            </div>
+            <div>
+                <a href="/test/{{ test.id }}/">Начать</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

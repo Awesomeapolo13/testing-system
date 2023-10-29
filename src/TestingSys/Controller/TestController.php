@@ -11,15 +11,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
-    #[Route(path: '/', methods: 'GET', name: 'app_testing_start_page')]
-    public function getStartPageAction(): Response
+    #[Route(path: '/', methods: 'GET', name: 'app_testing_list_page')]
+    public function getStartPageAction(TestGet $testGet): Response
     {
         return $this->render(
             'testing_sys/main.html.twig',
+            [
+                'testList' => $testGet->getTestList(),
+            ]
         );
     }
 
-    #[Route(path: '/test', methods: 'GET', name: 'app_test_page')]
+    #[Route(path: '/test/{id}/', methods: 'GET', name: 'app_test_page')]
     public function getTest(TestGet $testGet): Response
     {
         return $this->render(

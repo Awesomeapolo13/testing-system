@@ -4,9 +4,25 @@ declare(strict_types=1);
 
 namespace App\TestingSys\Services;
 
+use App\TestingSys\Entity\Test;
+use App\TestingSys\Repository\TestRepository;
+
 class TestGet
 {
-    public function getTest(): array
+    public function __construct(
+        private readonly TestRepository $testRepository,
+    ) {
+    }
+
+    /**
+     * @return Test[]
+     */
+    public function getTestList(): array
+    {
+        return $this->testRepository->getTestList();
+    }
+
+    public function getTest(int $testId): array
     {
         return [
             'test' => [
