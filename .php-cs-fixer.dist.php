@@ -21,6 +21,9 @@ return (new PhpCsFixer\Config())
         'global_namespace_import' => [
             'import_classes' => true,
         ],
+        'php_unit_method_casing' => [
+            'case' => 'snake_case'
+        ]
     ])
     ->setFinder($finder)
 ;
