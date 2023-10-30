@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tools\DataFixture;
+namespace App\Tests\Tools\DataFixture;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
