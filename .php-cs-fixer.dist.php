@@ -22,8 +22,13 @@ return (new PhpCsFixer\Config())
             'import_classes' => true,
         ],
         'php_unit_method_casing' => [
-            'case' => 'snake_case'
-        ]
+            'case' => 'snake_case',
+        ],
+        'yoda_style' => [
+            'equal' => false,
+            'identical' => false,
+            'less_and_greater' => false,
+        ],
     ])
     ->setFinder($finder)
 ;
