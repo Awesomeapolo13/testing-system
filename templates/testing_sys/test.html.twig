@@ -3,7 +3,7 @@
 {% block body %}
     <form method="POST" action="/test/result">
         <input type="hidden" name="id" value="{{ test.id }}">
-        {% for key, question in test %}
+        {% for key, question in test.questions %}
             <div>
                 {{ key + 1 }}) <label for="answer">{{ question.title }}</label>
                 {% for answer in question.answers %}

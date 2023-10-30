@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\TestingSys\Services;
 
 use App\TestingSys\Entity\Test;
-use App\TestingSys\Repository\QuestionRepository;
 use App\TestingSys\Repository\TestRepository;
 
 class TestGet
 {
     public function __construct(
         private readonly TestRepository $testRepository,
-        private readonly QuestionRepository $questionRepository,
     ) {
     }
 

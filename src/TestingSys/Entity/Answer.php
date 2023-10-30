@@ -4,6 +4,7 @@ namespace App\TestingSys\Entity;
 
 use App\TestingSys\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: AnswerRepository::class)]
 class Answer
@@ -18,6 +19,7 @@ class Answer
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Ignore]
     private ?Question $question = null;
 
     #[ORM\Column]

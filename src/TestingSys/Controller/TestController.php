@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\TestingSys\Controller;
 
+use App\Common\Service\Serializer\Interface\NormalizerInterface;
 use App\TestingSys\Services\TestGet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
+    public function __construct(
+        private readonly NormalizerInterface $normalizer,
+    ) {
+    }
+
     #[Route(path: '/', methods: 'GET', name: 'app_testing_list_page')]
     public function getStartPageAction(TestGet $testGet): Response
     {
@@ -27,7 +33,7 @@ class TestController extends AbstractController
     {
         return $this->render(
             'testing_sys/test.html.twig',
-            ['test' => $testGet->getTest($testId)]
+            ['test' => $this->normalizer->normalize($testGet->getTest($testId))]
         );
     }
 }
