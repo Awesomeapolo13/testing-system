@@ -2,12 +2,13 @@
 
 {% block body %}
     <form method="POST" action="/test/result">
+        <input type="hidden" name="id" value="{{ test.id }}">
         {% for key, question in test %}
             <div>
                 {{ key + 1 }}) <label for="answer">{{ question.title }}</label>
                 {% for answer in question.answers %}
                     <div>
-                        <input id="answer" name="{{ answer.title }}" type="checkbox"> {{ answer.title }}
+                        <input id="answer" name="{{ answer.title }}" value="{{ answer.id }}" type="checkbox"> {{ answer.title }}
                     </div>
                 {% endfor %}
             </div>

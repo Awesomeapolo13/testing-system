@@ -23,11 +23,11 @@ class TestController extends AbstractController
     }
 
     #[Route(path: '/test/{id}/', methods: 'GET', name: 'app_test_page')]
-    public function getTest(TestGet $testGet): Response
+    public function getTest(int $testId, TestGet $testGet): Response
     {
         return $this->render(
             'testing_sys/test.html.twig',
-            $testGet->getTest()
+            ['test' => $testGet->getTest($testId)]
         );
     }
 }
