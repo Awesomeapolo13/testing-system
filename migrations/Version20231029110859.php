@@ -23,27 +23,24 @@ final class Version20231029110859 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE question_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE test_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE answer (
-                                    id INT NOT NULL,
+                                    id SERIAL PRIMARY KEY,
                                     question_id INT NOT NULL,
                                     title VARCHAR(255) NOT NULL,
-                                    is_correct BOOLEAN NOT NULL,
-                                    PRIMARY KEY(id)
+                                    is_correct BOOLEAN NOT NULL
                     )'
         );
         $this->addSql('CREATE INDEX IDX_DADD4A251E27F6BF ON answer (question_id)');
         $this->addSql('CREATE TABLE question (
-                                    id INT NOT NULL,
+                                    id SERIAL PRIMARY KEY,
                                     test_id INT NOT NULL,
-                                    title VARCHAR(255) NOT NULL,
-                                    PRIMARY KEY(id)
+                                    title VARCHAR(255) NOT NULL
                       )'
         );
         $this->addSql('CREATE INDEX IDX_B6F7494E1E5D0459 ON question (test_id)');
         $this->addSql('CREATE TABLE test (
-                                    id INT NOT NULL,
+                                    id SERIAL PRIMARY KEY,
                                     title VARCHAR(255) NOT NULL,
-                                    description TEXT DEFAULT NULL,
-                                    PRIMARY KEY(id)
+                                    description TEXT DEFAULT NULL
                   )'
         );
         $this->addSql('ALTER TABLE answer
