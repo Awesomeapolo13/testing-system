@@ -22,7 +22,7 @@ class TestController extends AbstractController
         );
     }
 
-    #[Route(path: '/test/{id}/', methods: 'GET', name: 'app_test_page')]
+    #[Route(path: '/test/{testId}/', methods: 'GET', name: 'app_test_page')]
     public function getTest(int $testId, TestGet $testGet): Response
     {
         return $this->render(
