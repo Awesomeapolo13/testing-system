@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Test
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -21,7 +21,7 @@ class Test
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
-    #[ORM\OneToMany(mappedBy: 'test', targetEntity: Question::class)]
+    #[ORM\OneToMany(mappedBy: 'test', targetEntity: Question::class, cascade: ['persist'])]
     private Collection $questions;
 
     public function __construct()
@@ -66,7 +66,7 @@ class Test
         return $this->questions;
     }
 
-    public function addAnswer(Question $question): static
+    public function addQuestion(Question $question): static
     {
         if (!$this->questions->contains($question)) {
             $this->questions->add($question);
@@ -76,7 +76,7 @@ class Test
         return $this;
     }
 
-    public function removeAnswer(Question $question): static
+    public function removeQuestion(Question $question): static
     {
         if ($this->questions->removeElement($question)) {
             // set the owning side to null (unless already changed)

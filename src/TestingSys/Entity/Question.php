@@ -11,12 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Question
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
     private ?int $id = null;
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, cascade: ['persist'])]
     private Collection $answers;
     #[ORM\ManyToOne(inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
