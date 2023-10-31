@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\TestingSys\Controller;
 
 use App\Common\Service\Serializer\Interface\NormalizerInterface;
+use App\TestingSys\DTO\TestResultDto;
 use App\TestingSys\Services\TestGet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
@@ -43,8 +44,17 @@ class TestController extends AbstractController
     }
 
     #[Route(path: '/test/handle/', methods: 'POST', name: 'app_test_handle_result')]
-    public function handleTestResultAction(Request $request): Response
-    {
+    public function handleTestResultAction(
+        #[MapRequestPayload] TestResultDto $resultDto
+    ): Response {
+        /*
+         * ToDo: Обработать результаты:
+         *  1) Получить вопросы и связанные с ними ответы
+         *  2) Проанализировать ответы, пометить вопросы, ответы на которые даны корректно.
+         *  3) Записать результат в БД.
+         *  4) Передать результаты на страницу результатов.
+         */
+
         return $this->redirectToRoute('app_test_get_result');
     }
 
