@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <form method="POST" action="/test/result">
+    <form method="POST" action="/test/handle/">
         <input type="hidden" name="id" value="{{ test.id }}">
         {% for key, question in test.questions %}
             <div>
                 {{ key + 1 }}) <label for="answer">{{ question.title }}</label>
                 {% for answer in question.answers %}
                     <div>
-                        <input id="answer" name="{{ answer.title }}" value="{{ answer.id }}" type="checkbox"> {{ answer.title }}
+                        <input id="answer" name="{{ question.id }}[]" value="{{ answer.id }}" type="checkbox"> {{ answer.title }}
                     </div>
                 {% endfor %}
             </div>
