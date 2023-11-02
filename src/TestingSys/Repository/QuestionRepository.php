@@ -30,8 +30,8 @@ class QuestionRepository extends ServiceEntityRepository
         $queryBuilder
             ->select(
                 [
-                    'q.id AS questionId',
-                    'bool_and(a.is_correct) AS isCorrect',
+                    'q.id AS "questionId"',
+                    'bool_and(a.is_correct) AS "isCorrect"',
                 ]
             )
             ->from('question', 'q')
@@ -42,6 +42,7 @@ class QuestionRepository extends ServiceEntityRepository
                 'q.id = a.question_id AND ' . $queryBuilder->expr()->in('a.id', ':answerIds')
             )
             ->where('q.test_id = :testId')
+            ->orderBy('q.id')
             ->groupBy('q.id');
 
         $result = $connection->fetchAllAssociative(

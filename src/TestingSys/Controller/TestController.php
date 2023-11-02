@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\TestingSys\Controller;
 
 use App\Common\Service\Serializer\Interface\NormalizerInterface;
+use App\TestingSys\DTO\ShowTestResultDto;
 use App\TestingSys\DTO\TestResultDto;
 use App\TestingSys\Services\TestGet;
 use App\TestingSys\Services\TestResultHandle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,7 +33,7 @@ class TestController extends AbstractController
         );
     }
 
-    #[Route(path: '/test/{testId}/', methods: 'GET', name: 'app_test_page')]
+    #[Route(path: '/test/detail/{testId}/', methods: 'GET', name: 'app_test_page')]
     public function getTestDetailAction(int $testId, TestGet $testGet): Response
     {
         return $this->render(
@@ -51,19 +53,23 @@ class TestController extends AbstractController
     ): Response {
         /*
          * ToDo: Обработать результаты:
-         *  1) Получить вопросы и связанные с ними ответы
-         *  2) Проанализировать ответы, пометить вопросы, ответы на которые даны корректно.
-         *  3) Записать результат в БД.
-         *  4) Передать результаты на страницу результатов.
+         *  1) Записать результат в БД.
+         *  2) Передать результаты на страницу результатов.
          */
-        $resultHandle->handleResult($resultDto);
 
-        return $this->redirectToRoute('app_test_get_result');
+        return $this->redirectToRoute(
+            'app_test_get_result',
+            [
+                'testId' => $resultDto->testId,
+                'result' => $resultHandle->handleResult($resultDto),
+            ]
+        );
     }
 
     #[Route(path: '/test/result/', methods: 'GET', name: 'app_test_get_result')]
-    public function getTestResult(): Response
-    {
+    public function getTestResult(
+        #[MapQueryString] ShowTestResultDto $resultDto
+    ): Response {
         return $this->render(
             'testing_sys/test_result.html.twig'
         );
