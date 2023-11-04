@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Результаты теста:</h2>
+    {% for correct in result.correct %}
+        <div style="background-color: #3adb76">
+            <div>{{ correct.title }}</div>
+        </div>
+    {% endfor %}
+    {% for wrong in result.wrong %}
+        <div style="background-color: lightcoral">
+            <div>{{ wrong.title }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}

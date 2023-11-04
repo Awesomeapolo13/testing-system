@@ -8,6 +8,7 @@ use App\Common\Service\Serializer\Interface\NormalizerInterface;
 use App\TestingSys\DTO\ShowTestResultDto;
 use App\TestingSys\DTO\TestResultDto;
 use App\TestingSys\Services\TestGet;
+use App\TestingSys\Services\TestResultGet;
 use App\TestingSys\Services\TestResultHandle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,12 +52,6 @@ class TestController extends AbstractController
         #[MapRequestPayload] TestResultDto $resultDto,
         TestResultHandle $resultHandle
     ): Response {
-        /*
-         * ToDo: Обработать результаты:
-         *  1) Записать результат в БД.
-         *  2) Передать результаты на страницу результатов.
-         */
-
         return $this->redirectToRoute(
             'app_test_get_result',
             [
@@ -68,10 +63,16 @@ class TestController extends AbstractController
 
     #[Route(path: '/test/result/', methods: 'GET', name: 'app_test_get_result')]
     public function getTestResult(
-        #[MapQueryString] ShowTestResultDto $resultDto
+        #[MapQueryString] ShowTestResultDto $resultDto,
+        TestResultGet $resultGet
     ): Response {
         return $this->render(
-            'testing_sys/test_result.html.twig'
+            'testing_sys/test_result.html.twig',
+            [
+                'result' => $this->normalizer->normalize(
+                    $resultGet->getTestResult($resultDto)
+                ),
+            ]
         );
     }
 }
