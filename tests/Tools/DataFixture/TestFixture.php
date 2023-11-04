@@ -9,7 +9,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class TestFixture extends BaseFixture
 {
-
     public function loadData(ObjectManager $manager): void
     {
         $manager->persist(TestFactory::getTestEntity());

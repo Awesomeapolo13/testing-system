@@ -14,7 +14,7 @@ abstract class BaseFixture extends Fixture
 {
     protected Generator $faker;
     protected ObjectManager $manager;
-    protected array $referencesIndex =[];
+    protected array $referencesIndex = [];
 
     public function load(ObjectManager $manager): void
     {
