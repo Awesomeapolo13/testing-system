@@ -27,7 +27,7 @@ class AnnotationSerializer implements NormalizerInterface
     /**
      * @throws ExceptionInterface
      */
-    public function normalize(object $data): array
+    public function normalize(object|array $data): array
     {
         return (array)$this->serializer->normalize($data);
     }

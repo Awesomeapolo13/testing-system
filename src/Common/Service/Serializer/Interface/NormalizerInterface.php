@@ -6,5 +6,5 @@ namespace App\Common\Service\Serializer\Interface;
 
 interface NormalizerInterface
 {
-    public function normalize(object $data): array;
+    public function normalize(object|array $data): array;
 }
