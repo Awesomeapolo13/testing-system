@@ -14,4 +14,10 @@ class TestResultRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TestResult::class);
     }
+
+    public function save(TestResult $result): void
+    {
+        $this->getEntityManager()->persist($result);
+        $this->getEntityManager()->flush();
+    }
 }
