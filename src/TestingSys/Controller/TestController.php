@@ -70,7 +70,9 @@ class TestController extends AbstractController
             'testing_sys/test_result.html.twig',
             [
                 'result' => $this->normalizer->normalize(
-                    $resultGet->getTestResult($resultDto)
+                    $resultGet->getTestResult($resultDto),
+                    null,
+                    ['groups' => ['result']]
                 ),
             ]
         );
