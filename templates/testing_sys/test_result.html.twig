@@ -2,14 +2,23 @@
 
 {% block body %}
     <h2>Результаты теста:</h2>
-    <ol>
-        {% for correct in result.correct %}
-            <li style="background-color: #3adb76">{{ correct.title }}</li>
-        {% endfor %}
-    </ol>
-    <ol>
-        {% for wrong in result.wrong %}
-            <li style="background-color: lightcoral">{{ wrong.title }}</li>
-        {% endfor %}
-    </ol>
+    <div>
+        <div>
+            <ol>
+                {% for correct in result.correct %}
+                    <li style="background-color: #3adb76">{{ correct.title }}</li>
+                {% endfor %}
+            </ol>
+            <ol>
+                {% for wrong in result.wrong %}
+                    <li style="background-color: lightcoral">{{ wrong.title }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div>
+            <div><a href="/">К списку тестов</a></div>
+            <div><a href="/test/detail/{{ testId }}/">Пройти еще раз</a></div>
+        </div>
+    </div>
+
 {% endblock %}
