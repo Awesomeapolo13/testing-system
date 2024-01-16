@@ -53,7 +53,7 @@ class QuestionProvider
                 [
                     'id' => 7,
                     'title' => '1 + 5',
-                    'isCorrect' => false,
+                    'isCorrect' => true,
                 ],
                 [
                     'id' => 8,
@@ -67,7 +67,7 @@ class QuestionProvider
                 ],
                 [
                     'title' => '2 + 4',
-                    'isCorrect' => false,
+                    'isCorrect' => true,
                 ],
             ],
         ],
@@ -92,7 +92,7 @@ class QuestionProvider
                 [
                     'id' => 13,
                     'title' => '0 + 8',
-                    'isCorrect' => false,
+                    'isCorrect' => true,
                 ],
             ],
         ],
