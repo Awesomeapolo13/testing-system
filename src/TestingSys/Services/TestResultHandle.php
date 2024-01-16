@@ -37,7 +37,8 @@ class TestResultHandle
         } catch (DBALException $exception) {
             throw new HttpException(
                 HttpStatusCodeDictionary::BAD_REQUEST_CODE,
-                DefaultDictionary::DEFAULT_ERROR_MSG
+                DefaultDictionary::DEFAULT_ERROR_MSG,
+                $exception
             );
         }
 
