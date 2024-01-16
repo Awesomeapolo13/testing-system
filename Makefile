@@ -3,7 +3,7 @@
 ##################
 
 DOCKER_COMPOSE = docker compose -f ./.deployment/docker/docker-compose.yml --env-file ./.deployment/docker/.env
-DOCKER_COMPOSE_PHP_FPM_EXEC = ${DOCKER_COMPOSE} exec -u www-data php-fpm
+DOCKER_COMPOSE_PHP_FPM_EXEC = ${DOCKER_COMPOSE} exec php-fpm
 
 ##################
 # Docker compose
@@ -20,6 +20,9 @@ dc_stop:
 
 dc_up:
 	${DOCKER_COMPOSE} up -d --remove-orphans
+
+dc_up_build:
+	${DOCKER_COMPOSE} up -d --build
 
 dc_ps:
 	${DOCKER_COMPOSE} ps
@@ -39,12 +42,16 @@ dc_restart:
 ##################
 
 app_bash:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bash
-php:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bash
+	docker exec -it testing-sys-php-fpm bash
+com_i:
+	docker exec -it testing-sys-php-fpm composer install
 test:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/phpunit
-jwt:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console lexik:jwt:generate-keypair
+	docker exec -it testing-sys-php-fpm php bin/phpunit
 cache:
-	docker-compose -f ./docker/docker-compose.yml exec -u www-data php-fpm bin/console cache:clear
+	docker exec -it testing-sys-php-fpm php bin/console cache:clear
+m_run:
+	docker exec -it testing-sys-php-fpm php bin/console doctrine:migration:migrate
+fx_load:
+	docker exec -it testing-sys-php-fpm php bin/console doctrine:fixtures:load
+init:
+	make com_i m_run fx_load
