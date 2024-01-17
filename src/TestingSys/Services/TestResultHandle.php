@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\TestingSys\Services;
 
-use App\Common\Dictionary\DefaultDictionary;
-use App\Common\Dictionary\HttpStatusCodeDictionary;
 use App\TestingSys\DTO\QuestionResultDto;
 use App\TestingSys\DTO\TestResultDto;
 use App\TestingSys\Exception\TestNotFoundException;
@@ -13,7 +11,6 @@ use App\TestingSys\Factory\TestResultFactory;
 use App\TestingSys\Repository\QuestionRepository;
 use App\TestingSys\Repository\TestResultRepository;
 use Doctrine\DBAL\Exception as DBALException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TestResultHandle
 {
@@ -25,22 +22,16 @@ class TestResultHandle
 
     /**
      * Обработка результатов теста, их сохранение и возвращение.
+     *
+     * @throws DBALException
      */
     public function handleResult(TestResultDto $resultDto): array
     {
         $testId = $resultDto->testId;
-        try {
-            $testResult = $this->questionRepository->findQuestionResults(
-                $testId,
-                $this->getAnswerIds($resultDto->questions)
-            );
-        } catch (DBALException $exception) {
-            throw new HttpException(
-                HttpStatusCodeDictionary::BAD_REQUEST_CODE,
-                DefaultDictionary::DEFAULT_ERROR_MSG,
-                $exception
-            );
-        }
+        $testResult = $this->questionRepository->findQuestionResults(
+            $testId,
+            $this->getAnswerIds($resultDto->questions)
+        );
 
         if (is_null($testResult)) {
             throw new TestNotFoundException();

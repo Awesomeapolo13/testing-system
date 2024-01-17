@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace App\TestingSys\Services;
 
-use App\Common\Dictionary\DefaultDictionary;
-use App\Common\Dictionary\HttpStatusCodeDictionary;
 use App\TestingSys\DTO\ShowQuestionResDto;
 use App\TestingSys\DTO\ShowTestResultDto;
 use App\TestingSys\Entity\Question;
 use App\TestingSys\Entity\Test;
 use App\TestingSys\Exception\TestNotFoundException;
 use App\TestingSys\Repository\TestRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TestResultGet
 {
@@ -24,14 +20,7 @@ class TestResultGet
 
     public function getTestResult(ShowTestResultDto $testResult): array
     {
-        try {
-            $test = $this->testRepository->findTesById($testResult->testId);
-        } catch (NonUniqueResultException $exception) {
-            throw new HttpException(
-                HttpStatusCodeDictionary::BAD_REQUEST_CODE,
-                DefaultDictionary::DEFAULT_ERROR_MSG
-            );
-        }
+        $test = $this->testRepository->findTesById($testResult->testId);
 
         if (is_null($test)) {
             throw new TestNotFoundException();
@@ -51,7 +40,6 @@ class TestResultGet
         ];
 
         $test->getQuestions()->map(
-            // ToDo: Установить группы сериализации для вопросов, т.к. большая структура не нужна.
             function (Question $question) use (&$result, $testResult) {
                 foreach ($testResult as $resQuestion) {
                     if ($resQuestion->questionId === $question->getId()) {
