@@ -6,5 +6,5 @@ namespace App\Common\Dictionary;
 
 class DefaultDictionary
 {
-    public const DEFAULT_ERROR_MSG = 'Что-то пошло не так... ПОпробуйте позднее.';
+    public const DEFAULT_ERROR_MSG = 'Что-то пошло не так... Попробуйте позднее.';
 }
