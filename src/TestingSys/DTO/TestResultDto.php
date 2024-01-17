@@ -7,17 +7,17 @@ namespace App\TestingSys\DTO;
 use App\TestingSys\Dictionary\ValidationDictionary;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class TestResultDto
+readonly class TestResultDto
 {
     /**
      * @param QuestionResultDto[] $questions
      */
     public function __construct(
         #[Assert\NotBlank(message: ValidationDictionary::EMPTY_TEST_ID_MSG)]
-        public readonly ?int $testId,
+        public ?int $testId,
         #[Assert\NotBlank(message: ValidationDictionary::EMPTY_QUESTION_MSG)]
         #[Assert\Valid]
-        public readonly array $questions = [],
+        public array $questions = [],
     ) {
     }
 }
