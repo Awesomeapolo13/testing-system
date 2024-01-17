@@ -1,0 +1,15 @@
+controllers:
+    resource: ../src/Common/Controller/
+    type: attribute
+
+kernel:
+    resource: ../src/Common/Kernel.php
+    type: attribute
+
+health_check:
+    resource: ../src/Common/Controller/
+    type: attribute
+
+testing_sys:
+    resource: ../src/TestingSys/Controller/
+    type: attribute
