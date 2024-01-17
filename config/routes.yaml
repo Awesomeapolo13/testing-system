@@ -9,3 +9,7 @@ kernel:
 health_check:
     resource: ../src/Common/Controller/
     type: attribute
+
+testing_sys:
+    resource: ../src/TestingSys/Controller/
+    type: attribute

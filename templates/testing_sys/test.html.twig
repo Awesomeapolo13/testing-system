@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="POST" action="{{ path('app_test_handle_result') }}">
+        <input type="hidden" name="testId" value="{{ test.id }}">
+        {% for key, question in test.questions %}
+            <div>
+                {{ key + 1 }}) <label for="answer">{{ question.title }}</label>
+                <input
+                        id="question"
+                        name="questions[{{ question.id }}][id]"
+                        value="{{ question.id }}"
+                        type="hidden"
+                >
+                {% for answer in question.answers %}
+                    <div>
+                        <input
+                                id="answer"
+                                name="questions[{{ question.id }}][answerIds][]"
+                                value="{{ answer.id }}"
+                                type="checkbox"
+                        > {{ answer.title }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+        <div>
+            Не обнаружено вопросов.
+        </div>
+        {% endfor %}
+
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}
