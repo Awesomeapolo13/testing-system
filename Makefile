@@ -42,16 +42,16 @@ dc_restart:
 ##################
 
 app_bash:
-	docker exec -it testing-sys-php-fpm bash
+	${DOCKER_EXEC_PHP} bash
 com_i:
-	docker exec -it testing-sys-php-fpm composer install
+	${DOCKER_EXEC_PHP} composer install
 test:
-	docker exec -it testing-sys-php-fpm php bin/phpunit
+	${DOCKER_EXEC_PHP} php bin/phpunit
 cache:
-	docker exec -it testing-sys-php-fpm php bin/console cache:clear
+	${DOCKER_EXEC_PHP} php bin/console cache:clear
 m_run:
-	docker exec -it testing-sys-php-fpm php bin/console doctrine:migration:migrate
+	${DOCKER_EXEC_PHP} php bin/console doctrine:migration:migrate
 fx_load:
-	docker exec -it testing-sys-php-fpm php bin/console doctrine:fixtures:load
+	${DOCKER_EXEC_PHP} php bin/console doctrine:fixtures:load
 init:
 	make com_i m_run fx_load
